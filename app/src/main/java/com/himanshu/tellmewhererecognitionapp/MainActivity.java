@@ -8,18 +8,21 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
 
     private static final int SPEAK_REQUEST = 10;
 
     TextView txtValue;
+    Button btnVoice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         txtValue = findViewById(R.id.txtValue);
+        btnVoice = findViewById(R.id.btnVoice);
+        btnVoice.setOnClickListener(MainActivity.this);
 
         PackageManager packageManager = this.getPackageManager();
 
@@ -78,6 +83,20 @@ public class MainActivity extends AppCompatActivity
                     txtValue.setText(userWord + " - " + confidLevels[index]);
                 }
             }
+        }
+    }
+
+
+    @Override
+    public void onClick(View view)
+    {
+        switch(view.getId())
+        {
+            case R.id.btnVoice :
+                listenToTheUserVoice();
+                break;
+
+
         }
     }
 }

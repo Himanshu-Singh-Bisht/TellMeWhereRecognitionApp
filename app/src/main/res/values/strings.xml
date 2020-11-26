@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Tell Me Where Recognition App</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
