@@ -2,12 +2,15 @@ package com.himanshu.tellmewhererecognitionapp;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -34,13 +37,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
+    // this method got executed when the map is ready.
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        // to move camera to that location
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(sydney , 10.0f);
+        mMap.moveCamera(cameraUpdate);
+
+        // to add marker to that location
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(sydney);
+        markerOptions.title("Welcome To Sydney");
+        markerOptions.snippet("Fantastic Place");
+        mMap.addMarker(markerOptions);
+
+        // now creating a circle around the location present
+        CircleOptions circleOptions = new CircleOptions();
+        circleOptions.center(sydney);
+        circleOptions.radius(300);
+        circleOptions.strokeWidth(20.0f);
+        circleOptions.strokeColor(Color.YELLOW);
+        mMap.addCircle(circleOptions);
+
+        
     }
 }
