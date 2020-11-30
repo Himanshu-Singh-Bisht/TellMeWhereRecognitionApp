@@ -65,6 +65,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         circleOptions.strokeColor(Color.YELLOW);
         mMap.addCircle(circleOptions);
 
-        
+
     }
 }
